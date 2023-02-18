@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Discord Webhook</title>
+    <title>AlphaSender</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
-        background-color: #222;
+        background-color: #292c35;
         color: #fff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
       }
       
       form {
         display: flex;
         flex-direction: column;
-        margin-bottom: 16px;
+        align-items: center;
+        margin-top: 2rem;
       }
       
       label {
-        margin-bottom: 8px;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
       }
       
       input[type="text"] {
-        padding: 8px;
-        margin-bottom: 8px;
-        border-radius: 4px;
+        width: 80%;
+        padding: 0.5rem;
+        font-size: 1.5rem;
         border: none;
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
       }
       
-      button {
-        padding: 8px;
-        border-radius: 4px;
-        border: none;
+      button[type="submit"] {
         background-color: #7289DA;
         color: #fff;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
         cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
       }
       
-      button:hover {
+      button[type="submit"]:hover {
         background-color: #5a68a5;
       }
     </style>
   </head>
   <body>
-    <h1>Discord Webhook</h1>
+    <h1>AlphaSender</h1>
     <form>
-      <label for="message">Message:</label>
-      <input type="text" id="message" name="message">
+      <label for="message">Enter your message:</label>
+      <input type="text" id="message" name="message" maxlength="200">
       <button type="submit">Send Message</button>
     </form>
-    <script>
-      // Discord webhook URL
-      const webhookUrl = "https://discordapp.com/api/webhooks/1076406136179273879/LZLjYQOoj2lT_S_OQUI1Y4KcjlQ6b3z4NwKhSA_3SFSSZzj6uiouInQzE7bBeFQ6bjfK";
-
-      // Function to send a message to the webhook
-      function sendMessage(message) {
-        fetch(webhookUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({content: message})
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new
+  </body>
+</html>
