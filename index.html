@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Send Message to Discord Webhook</title>
+    <style>
+      body {
+        background-color: #222;
+        font-family: Arial, sans-serif;
+        color: #fff;
+      }
+      
+      form {
+        margin: 20px auto;
+        max-width: 600px;
+        padding: 20px;
+        background-color: #333;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+      
+      label {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+      
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      
+      button[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      
+      button[type="submit"]:hover {
+        background-color: #3E8E41;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <label for="message">Message:</label>
+      <input type="text" id="message" name="message" required>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <script>
+      const form = document.querySelector('form');
+      const messageInput = document.querySelector('#message');
+
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+
+        // Replace WEBHOOK_URL with your actual webhook URL
+        const webhookUrl = 'https://discordapp.com/api/webhooks/1075089423668088922/gZPi72JPBi6sT77MO0mtaBA2wy752vxoKhg-Focd2Dns1jKVv4XYQcvwwL_Dsb-8bObh';
+
+        // Get the message from the input field
+        const message = messageInput.value;
+
+        // Define the message content as a JSON payload
+        const payload = {
+          content: message
+        };
+
+        // Send the message to the webhook
+        fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        })
+          .then(response => {
+            if (response.ok) {
+              alert('Message sent successfully!');
+            } else {
+              throw new Error('Failed to send message');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            alert('Failed to send message');
+          });
+      });
+    </script>
+  </body>
+</html>
