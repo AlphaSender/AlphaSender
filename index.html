@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AlphaSender</title>
+    <title>Discord Webhook Sender</title>
     <style>
       body {
         background-color: #292c35;
@@ -53,11 +53,37 @@
     </style>
   </head>
   <body>
-    <h1>AlphaSender</h1>
+    <h1>Discord Webhook Sender</h1>
     <form>
-      <label for="message">Enter your message:</label>
+      <label for="webhookUrl">Webhook URL:</label>
+      <input type="text" id="webhookUrl" name="webhookUrl" placeholder="https://discordapp.com/api/webhooks/...">
+      <label for="message">Message:</label>
       <input type="text" id="message" name="message" maxlength="200">
       <button type="submit">Send Message</button>
     </form>
+    <script>
+      const form = document.querySelector('form');
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const webhookUrl = document.getElementById('webhookUrl').value;
+        const message = document.getElementById('message').value;
+        try {
+          const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({content: message})
+          });
+          if (response.ok) {
+            alert('Message sent successfully!');
+          } else {
+            alert(`An error occurred: ${response.statusText}`);
+          }
+        } catch (error) {
+          alert(`An error occurred: ${error}`);
+        }
+      });
+    </script>
   </body>
 </html>
